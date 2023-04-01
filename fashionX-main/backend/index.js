@@ -1,51 +1,73 @@
-import express from "express";
-import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
-import cors from "cors";
-import UserRoute from "./routes/userRoute.js";
-import ProductRoute from "./routes/productRoute.js";
-import cartRoute from "./routes/cartRoute.js";
-import stripeRoute from "./routes/payment.js";
-import WishlistRoute from "./routes/Wishlist.js";
-import orderRoute from "./routes/orderRoute.js";
-import paymentRoute from "./routes/payment.js";
-import path from "path";
-
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(cors());
-app.use(express.json({ limit: "30mb", extended: true }));
-app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
-app.use("/api/user", UserRoute);
-app.use("/api/products", ProductRoute);
-app.use("/api/cart", cartRoute);
-app.use("/api/stripe", stripeRoute);
-app.use("/api/orders", orderRoute);
-app.use("/api/wishlist", WishlistRoute);
-app.use("/api/checkout", paymentRoute);
-
-const connectDb = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MANGO_URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-
-    console.log(`MangoDb connected: ${conn.connection.host}`.cyan.underline);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
+mongoose.connect(
+  "mongodb+srv://2100032064:Pass123@mern.sujngyj.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   }
-};
-connectDb();
-
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/frontend/build')));
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
 );
 
-app.listen(process.env.PORT, () => {
-  console.log(`server running on port ${process.env.PORT}`);
+const db = mongoose.connection;
+db.once("open", () => {
+  console.log("connected to DB");
+});
+
+//user schema
+const userSchema = new mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  email: String,
+  password: String,
+});
+
+const User = mongoose.model("User", userSchema);
+
+//routes routes
+app.post("/Login", async (req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body)
+  try {
+    const user = await User.findOne({ email: email });
+    if (user) {
+      if (password === user.password) {
+        res.send({ message: "login success"});
+      } else {
+        res.send({ message: "wrong credentials" });
+      }
+    } else {
+      res.send("not registered");
+    }
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+app.post("/Register", async (req, res) => {
+  console.log(req.body);
+  const { firstName, lastName, email, password } = req.body;
+  try {
+    const existingUser = await User.findOne({ email: email });
+    if (existingUser) {
+      res.send({ message: "user already exists" });
+      console.log("user already exists");
+    } else {
+      const newUser = new User({firstName, lastName, email, password });
+      await newUser.save();
+      console.log(newUser);
+      res.send({ message: "successful" });
+    }
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+app.listen(6969, () => {
+  console.log("started");
 });
