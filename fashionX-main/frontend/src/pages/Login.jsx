@@ -1,151 +1,120 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import styled from "styled-components";
-import { loginUser } from "../redux/userRedux";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import LoadingSpinner from "../components/Spinner";
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from "axios";
+import {useState} from 'react'
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fthumbs.dreamstime.com%2Fz%2Fevent-management-business-background-chalkboard-wooden-176007384.jpg&tbnid=VYvg6FlVe-yW2M&vet=12ahUKEwiGs6-F6PP9AhWzjOYKHYiGAxYQMygSegUIARD_AQ..i&imgrefurl=https%3A%2F%2Fwww.dreamstime.com%2Fphotos-images%2Fevent-management.html&docid=hSsNxrsxzJz-QM&w=1600&h=1156&q=event%20management%20photos&ved=2ahUKEwiGs6-F6PP9AhWzjOYKHYiGAxYQMygSegUIARD_AQ");
-  background-size: contain;
-  background-position: 300% 50%;
-  display: flex;
-  align-items: flex-start;
 
-  @media (max-width: 768px) {
-    background-repeat: no-repeat;
-    background-position: 28% center;
-    background-size: cover;
-  }
+const theme = createTheme();
 
-  .Link {
-    margin: 5px 0px;
-    font-size: 12px;
-    text-decoration: underline;
-    cursor: pointer;
-    color: #654321;
-  }
-`;
+export default function SignIn() {
+    
+  const [user,setUser] = useState({
+    email:"",
+    password: ""
+})
+const handleChange = e =>{
+const {name,value} = e.target
+setUser({
+...user,//spread operator 
+[name]:value
+})
+}
 
-const Wrapper = styled.div`
-  width: 30%;
-  height: 100%;
-  padding: 30px;
-  background-color: rgba(255, 255, 255, 0.6);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 40px;
-  font-weight: 600;
-  color: #54381d;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const Input = styled.input`
-  margin: 10px 0;
-  padding: 10px;
-  border: none;
-  outline: 1px solid #54381d;
-
-  &:focus {
-    outline: 2px solid #54381d;
-  }
-`;
-
-const Button = styled.button`
-  width: 40%;
-  border: none;
-  padding: 12px 20px;
-  background-color: #54381d;
-  color: white;
-  cursor: pointer;
-  margin: 10px 0px;
-
-  &:disabled {
-    color: green;
-    cursor: not-allowed;
-  }
-`;
-
-const Login = () => {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const [userDetails, setUserDetails] = useState({
-    email: "",
-    password: "",
+const handleSubmit = (event) => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  console.log({
+    email: data.get('email'),
+    password: data.get('password'),
   });
-
-  const onChange = (e) => {
-    setUserDetails({
-      ...userDetails,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await dispatch(loginUser({ userDetails }));
-      res.type === "user/login/fulfilled"
-        ? toast.success("Successfully Logged In")
-        : toast.error("Invalid Credentials");
-    } catch (err) {
-      toast.error("Something went wrong");
-    }
-    setLoading(false);
-  };
-
-  return (
-    <Container>
-      <Wrapper>
-        <Title>SIGN IN</Title>
-        <Form onSubmit={handleSubmit}>
-          <Input
-            placeholder="Email"
-            name="email"
-            type="email"
-            value={userDetails.email}
-            onChange={onChange}
-          />
-          <Input
-            placeholder="password"
-            name="password"
-            type="password"
-            value={userDetails.password}
-            onChange={onChange}
-          />
-          <Button type="submit">LOGIN</Button>
-          <span className="Link">DO NOT YOU REMEMBER THE PASSWORD?</span>
-          <Link to="/register" className="Link">
-            CREATE A NEW ACCOUNT
-          </Link>
-          {loading && <LoadingSpinner />}
-        </Form>
-      </Wrapper>
-    </Container>
-  );
+  axios.post("http://localhost:6969/Login",user)
+  .then(res=>{alert(res.data.message)
+    SignIn(res.data.user)
+   })
 };
 
-export default Login;
+          
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={handleChange}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/register" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
+  );
+}
