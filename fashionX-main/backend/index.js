@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 import cors from "cors";
-import colors from "colors";
 import UserRoute from "./routes/userRoute.js";
 import ProductRoute from "./routes/productRoute.js";
 import cartRoute from "./routes/cartRoute.js";

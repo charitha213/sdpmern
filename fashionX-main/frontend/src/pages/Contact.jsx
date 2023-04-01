@@ -214,31 +214,25 @@ const Contact = () => {
             <div>
               <li>
                 <MapOutlined />
-                <p>450 Serra Mall, Stanford, CA 94305, United States</p>
+                <p>Kl university, Vaddeswaram, Andhra pradesh</p>
               </li>
               <li>
                 <MailOutlined />
-                <p>Contact@example.com</p>
+                <p>Contact@EVENTO.com</p>
               </li>
               <li>
                 <PhoneOutlined />
-                <p>Contact@example.com</p>
+                <p>1234567890</p>
               </li>
               <li>
                 <AccessTime />
-                <p>Monday to Sunday 9 am to 16 pm</p>
+                <p>Monday to Sunday 9 am to 6 pm</p>
               </li>
             </div>
           </Details>
           <Map>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.407431939705!2d-122.17190768562044!3d37.42747873983917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fbb2a678bea9d%3A0x29cdf01a44fc687f!2sStanford%20University!5e0!3m2!1sen!2sin!4v1651552930015!5m2!1sen!2sin"
-              width="600"
-              height="450"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+          <img src="img/p12.jpg" alt="" />
+              
           </Map>
         </Section>
         <Form>
@@ -257,22 +251,22 @@ const Contact = () => {
             <Item>
               <img src="img/p1.png" alt="" />
               <p>
-                <span>John Doe</span> Senior Marketing Manager <br /> Phone: +
-                91 123 456 78 90 <br /> Email: kamesh@example.com
+                <span>Vinay</span> student <br /> Phone: +
+                91 123 456 78 90 <br /> Email: vinay@gmail.com
               </p>
             </Item>
             <Item>
               <img src="img/p2.png" alt="" />
               <p>
-                <span>Mark Spectar</span> Senior Marketing Manager <br /> Phone:
-                + 91 739 211 83 82 <br /> Email: kamesh@example.com
+                <span>Charitha</span> student<br /> Phone:
+                + 91 739 211 83 82 <br /> Email: charitha@gmail.com
               </p>
             </Item>
             <Item>
               <img src="img/p3.png" alt="" />
               <p>
-                <span>Matt Murdock</span> Senior Marketing Manager <br /> Phone:
-                + 91 853 834 92 12 <br /> Email: kamesh@example.com
+                <span>Navya</span> student <br /> Phone:
+                + 91 853 834 92 12 <br /> Email: navya@gmail.com
               </p>
             </Item>
           </People>
