@@ -58,7 +58,7 @@ function ProductList() {
       name: "Cineyug",
       image: "img/product3.jpg",
       description:
-        "Cineyug - Service Provider of event management services & other services in Mumbai, Maharashtra. Nature of Business. Service Provider. Legal Status of Firm. We generate brand awareness through events by analyzing real metrics that matter to the organization's bottom line.",
+        "Cineyug - Service Provider of event management system services & other services in Mumbai, Maharashtra. Nature of Business. Service Provider. Legal Status of Firm. We generate brand awareness through events by analyzing real metrics that matter to the organization's bottom line.",
       contact: {
         phone: "555-3456",
         email: "contact@dnaentertainment.com",
