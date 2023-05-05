@@ -7,18 +7,31 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from "axios";
+import zxcvbn from 'zxcvbn';
+import { registerUser } from "../redux/userRedux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const theme = createTheme();
 
+
 export default function SignUp() {
+  const dispatch = useDispatch();
+  const [passwordStrength, setPasswordStrength] = useState(null);
+
+const handlePasswordChange = (event) => {
+  const password = event.target.value;
+  const { score } = zxcvbn(password);
+  setPasswordStrength(score);
+};
+
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -74,13 +87,14 @@ export default function SignUp() {
     return true;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const { firstName, lastName, email, password } = user;
     if (validateName(firstName) && validateName(lastName) && validateEmail() && validatePassword()) {
-      axios
-        .post('http://localhost:6969/Register', user)
-        .then((res) => console.log(res));
+      const data = await dispatch(registerUser(user));
+      data.type === "user/register/fulfilled"
+        ? toast.success("Successfully Registered")
+        : toast.error("Invalid Credentials");
     }
   };
 
@@ -146,8 +160,24 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  onChange={handleChange}
+                  onChange={(event) => {
+                    handleChange(event);
+                    handlePasswordChange(event);
+                  }}
+                  error={passwordStrength !== null && passwordStrength < 3}
+                  helperText={
+                    passwordStrength !== null &&
+                    passwordStrength < 3 &&
+                    'Password is not strong enough'
+                  }
                 />
+                
+                {passwordStrength !== null && (
+                  <Typography color={passwordStrength < 3 ? 'error' : 'textPrimary'}>
+                    Password strength: {['Very weak', 'Weak', 'Fair', 'Strong', 'Very strong'][passwordStrength]}
+                  </Typography>
+                )}
+                
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel

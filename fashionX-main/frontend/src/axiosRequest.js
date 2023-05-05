@@ -3,7 +3,7 @@ import axios from "axios";
 let token = localStorage.getItem("token");
 token = token && token.replace(/['"]+/g, "");
 
-const baseUrl = "https://fashionx.onrender.com/api";
+const baseUrl = "http://localhost:6969";
 
 export const publicRequest = axios.create({
   baseURL: baseUrl,

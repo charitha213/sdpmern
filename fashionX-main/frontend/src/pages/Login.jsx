@@ -13,13 +13,19 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
-import {useState} from 'react'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
+import { loginUser } from "../redux/userRedux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingSpinner from "../components/Spinner";
 
 
 const theme = createTheme();
 
 export default function SignIn() {
-    
+  const dispatch = useDispatch();
   const [user,setUser] = useState({
     email:"",
     password: ""
@@ -32,17 +38,21 @@ setUser({
 })
 }
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   console.log({
     email: data.get('email'),
     password: data.get('password'),
   });
-  axios.post("http://localhost:6969/Login",user)
-  .then(res=>{alert(res.data.message)
-    SignIn(res.data.user)
-   })
+  try {
+    const res = await dispatch(loginUser({ user }));
+    res.type === "user/login/fulfilled"
+      ? toast.success("Successfully Logged In")
+      : toast.error("Invalid Credentials");
+  } catch (err) {
+    toast.error("Something went wrong");
+  }
 };
 
           

@@ -6,6 +6,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
+
 mongoose.connect(
   "mongodb+srv://2100032064:Pass123@mern.sujngyj.mongodb.net/?retryWrites=true&w=majority",
   {
@@ -30,7 +31,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 //routes routes
-app.post("/Login", async (req, res) => {
+app.post("/user/Login", async (req, res) => {
   const { email, password } = req.body;
   console.log(req.body)
   try {
@@ -49,7 +50,7 @@ app.post("/Login", async (req, res) => {
   }
 });
 
-app.post("/Register", async (req, res) => {
+app.post("/user/Register", async (req, res) => {
   console.log(req.body);
   const { firstName, lastName, email, password } = req.body;
   try {

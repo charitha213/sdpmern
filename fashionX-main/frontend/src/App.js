@@ -17,6 +17,7 @@ import Order from "./pages/Orders";
 import { ToastContainer } from "react-toastify";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
+import SectorList from "./pages/SectorList";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -38,6 +39,7 @@ function App() {
 
   return (
     <>
+    
       <ToastContainer />
       <Container>
         {setShowNav && <Navbar setshowCart={setshowCart} showCart={showCart} />}
@@ -76,6 +78,7 @@ function App() {
             }
           />
           <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/SectorList" element={<SectorList />}/>
           <Route exact path="/blog" element={<Blog />} />
         </Routes>
         {showCart && (

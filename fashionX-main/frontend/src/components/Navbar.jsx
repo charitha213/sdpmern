@@ -18,6 +18,7 @@ import { Badge } from "@mui/material";
 import { toast } from "react-toastify";
 import SideMenu from "./Menu";
 
+
 const Navbar = ({ setshowCart, showCart }) => {
   const user = useSelector((state) => state.user.currentUser);
   const Quantity = useSelector((state) => state.cart.quantity);
@@ -72,9 +73,13 @@ const Navbar = ({ setshowCart, showCart }) => {
             <Link to="/products" className="link">
               <span>Services</span>
             </Link>
+            <Link to="/SectorList" className="link">
+              <span>Categories</span>
+            </Link>
             <Link to="/contact" className="link">
               <span>Contact</span>
             </Link>
+            
             <Link to="/wishlist" className="link">
               <FavoriteBorderOutlined />
               <span>Wishlist</span>
@@ -83,12 +88,11 @@ const Navbar = ({ setshowCart, showCart }) => {
               onClick={() => (user ? setshowCart(true) : navigate("/login"))}
               className="link"
             >
-              <Badge badgeContent={Quantity} color="secondary" fontSize="small">
-                <ShoppingCartOutlined />
-              </Badge>
+              
            
             </div>
           </Menu>
+          
           <Links>
             <FacebookOutlined fontSize="small" className="icon" />
             <Instagram fontSize="small" className="icon" />
