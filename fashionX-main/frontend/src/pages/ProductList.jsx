@@ -174,6 +174,12 @@ function ProductList() {
           <p>Phone: {selectedProduct.contact.phone}</p>
           <p>Email: {selectedProduct.contact.email}</p>
           <p>Website: {selectedProduct.contact.website}</p>
+           <p>
+                  Website:{" "}
+                  <a href={selectedProduct.contact.website} target="_blank">
+                    {selectedProduct.contact.website}
+                  </a>
+                </p>
           <button onClick={() => setSelectedProduct(null)}>
             Add to wishlist
           </button>
