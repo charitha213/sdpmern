@@ -41,10 +41,11 @@ setUser({
 const handleSubmit = async (event) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
-  console.log({
+  const user_data = {
     email: data.get('email'),
     password: data.get('password'),
-  });
+  };
+  console.log(user_data)
   try {
     const res = await dispatch(loginUser({ user }));
     res.type === "user/login/fulfilled"

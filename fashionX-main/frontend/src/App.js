@@ -21,6 +21,7 @@ import Blog from "./pages/Blog";
 import SectorList from "./pages/SectorList";
 
 function App() {
+  console.log(process.env.REACT_APP_STRIPE_KEY);
   const user = useSelector((state) => state.user.currentUser);
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
   const [showCart, setshowCart] = useState(false);
