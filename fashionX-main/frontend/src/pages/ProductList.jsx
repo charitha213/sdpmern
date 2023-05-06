@@ -138,7 +138,16 @@ function ProductList() {
                 {product.description}
               </p>
               <br></br>
-              <button><a href="/EventService">
+              <button><a href="/EventService"
+                 variant="contained"
+                 style={{
+                   
+                   width: "100px",
+                   height: "50px",
+                   borderRadius: "1.5rem",
+                   color: "black",
+                   fontWeight: "bold",
+                 }}>
               Contact details
               </a>
               </button>
@@ -180,3 +189,12 @@ function ProductList() {
 }
 
 export default ProductList;
+export const products = {
+  name: 'name',
+      image: 'image',
+      description: 'description',
+      contact: {
+        phone: 'phone',
+        email: 'email',
+        website: 'website',
+}};

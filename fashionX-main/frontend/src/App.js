@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import EventService from "./pages/singleService";
+import IndCateg from "./pages/indCateg";
 import Register from "./pages/Register";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Product from "./pages/Product";
@@ -81,6 +82,8 @@ function App() {
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/SectorList" element={<SectorList />}/>
           <Route exact path="/EventService" element={<EventService />}/>
+          <Route path="/indCateg" element={<IndCateg />} />
+
           <Route exact path="/blog" element={<Blog />} />
         </Routes>
         {showCart && (
