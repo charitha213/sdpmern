@@ -159,7 +159,7 @@ const Button = styled.button`
   }
 `;
 
-const Product = () => {
+const Product2 = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -265,4 +265,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Product2;

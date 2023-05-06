@@ -4,6 +4,7 @@ import { Card, CardContent, Typography, Grid, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    paddingTop: 100,
     minWidth: 275,
     margin: theme.spacing(2),
     padding: theme.spacing(2),
@@ -28,7 +29,7 @@ function EventService() {
     
     <Card className={classes.root}>
       <CardContent>
-      <h1>hello mfs</h1>
+     
         <Typography className={classes.title}>
           Wizcraft
         </Typography>

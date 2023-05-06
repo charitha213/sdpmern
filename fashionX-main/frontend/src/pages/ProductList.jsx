@@ -138,19 +138,9 @@ function ProductList() {
                 {product.description}
               </p>
               <br></br>
-              <button
-                onClick={() => handleProductClick(product)}
-                variant="contained"
-                style={{
-                  backgroundColor: "black",
-                  width: "100px",
-                  height: "50px",
-                  borderRadius: "1.5rem",
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              >
-                Contact details
+              <button><a href="/EventService">
+              Contact details
+              </a>
               </button>
             </li>
           ))}
