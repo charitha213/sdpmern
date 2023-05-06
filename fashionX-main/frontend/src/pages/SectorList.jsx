@@ -6,12 +6,12 @@ import Footer from "../components/Footer";
 import { useLocation } from "react-router-dom";
 
 const Container = styled.div`
-  padding: 80px;
+padding: 80px;
 
-  @media (max-width: 768px) {
-    padding: 14px;
-  }
-  background-color:  black;
+@media (max-width: 768px) {
+  padding: 14px;
+}
+background-color:  black;
 `;
 
 function SectorList() {
@@ -43,6 +43,7 @@ function SectorList() {
       <div>
         <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Individual Sectors List</h2>
         <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+<<<<<<< HEAD
         
             {sectors.map((sector, index) => (
               <li key={index} style={{ listStyleType: 'none', backgroundColor: 'white', boxShadow: '0 0 5px rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '0.5rem', cursor: 'pointer' }}>
@@ -54,15 +55,26 @@ function SectorList() {
               </li>
             ))}
       
+=======
+        {sectors.map((sector, index) => (
+  <li key={index} onClick={() => handleSectorClick(sector)} style={{ listStyleType: 'none', backgroundColor: 'white', boxShadow: '0 0 5px rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '20px', overflow: 'hidden', cursor: 'pointer' }}>
+    <img src={sector.imageUrl} alt={sector.name} style={{ width: '200px', height: '200px', marginBottom: '2rem', borderRadius: '50%' }} />
+    <h3 style={{ marginBottom: '0.5rem', fontSize: '1.5rem' }}>{sector.name}</h3>
+    <p style={{ marginTop: '0.5rem', fontSize: '1.5rem' }}>{sector.description}</p>
+  </li>
+))}
+
+          ))}
+>>>>>>> 46ae68cc75b72a9aa8209ff34d8451e2976cfcbf
         </ul>
+      
         {selectedSector && (
-          <div style={{ marginTop: '2rem', color: 'white' }}>
+          <div style={{ marginTop: '2rem', color: 'black' }}>
             <img src={selectedSector.imageUrl} alt={selectedSector.name} style={{ width: '200px', height: '200px', marginBottom: '1rem' }} />
             <h3 style={{ fontSize: '1.5rem' }}>{selectedSector.name}</h3>
-            <p style={{ marginTop: '0.5rem', fontSize: '1rem' }}>{selectedSector.contact}</p>
-            <br></br>
             <button onClick={() => setSelectedSector(null)}>Add to wishlist</button>
           </div>
+          
         )}
       </div>
     </Container>

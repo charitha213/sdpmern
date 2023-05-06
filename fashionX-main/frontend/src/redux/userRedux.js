@@ -40,9 +40,10 @@ const userSlice = createSlice({
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async ({ userDetails: user }, thunkAPI) => {
+  async (user, thunkAPI) => {
+    console.log("poochi", user)
     try {
-      const response = await publicRequest.post("/user/login", user);
+      const response = await publicRequest.post("/api/user/login", user);
       localStorage.setItem("token", JSON.stringify(response.data.token));
       return response.data;
     } catch (err) {
@@ -55,7 +56,7 @@ export const registerUser = createAsyncThunk(
   "user/register",
   async (user, thunkAPI) => {
     try {
-      const res = await publicRequest.post("/user/register", user);
+      const res = await publicRequest.post("/api/user/register", user);
       return res.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);

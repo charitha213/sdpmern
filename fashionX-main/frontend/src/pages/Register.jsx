@@ -33,8 +33,7 @@ const handlePasswordChange = (event) => {
 };
 
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
+    username: '',
     email: '',
     password: '',
   });
@@ -89,8 +88,8 @@ const handlePasswordChange = (event) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, password } = user;
-    if (validateName(firstName) && validateName(lastName) && validateEmail() && validatePassword()) {
+    const { username, email, password } = user;
+    if (validateName(username) && validateEmail() && validatePassword()) {
       const data = await dispatch(registerUser(user));
       data.type === "user/register/fulfilled"
         ? toast.success("Successfully Registered")
@@ -121,23 +120,12 @@ const handlePasswordChange = (event) => {
                 <TextField
                 onChange={handleChange}
                   autoComplete="given-name"
-                  name="firstName"
+                  name="username"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="username"
+                  label="username"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
