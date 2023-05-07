@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import SectorList from "./pages/SectorList";
+import ProductForm from "./pages/addProduct";
 
 function App() {
   console.log(process.env.REACT_APP_STRIPE_KEY);
@@ -84,6 +85,8 @@ function App() {
           <Route exact path="/SectorList" element={<SectorList />}/>
           <Route exact path="/EventService" element={<EventService />}/>
           <Route path="/indCateg" element={<IndCateg />} />
+          <Route exact path="/EventService" element={<EventService />}/>
+          <Route exact path="/ProductForm" element={<ProductForm/>}/>
 
           <Route exact path="/blog" element={<Blog />} />
         </Routes>

@@ -47,7 +47,7 @@ function SectorList() {
             {sectors.map((sector, index) => (
               <li key={index} style={{ listStyleType: 'none', backgroundColor: 'white', boxShadow: '0 0 5px rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '0.5rem', cursor: 'pointer' }}>
                 <Link to={`/indCateg`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <img src={sector.imageUrl} alt={sector.name} style={{ width: '200px', height: '200px', marginBottom: '1rem' }} />
+                <img src={sector.imageUrl} alt={sector.name} style={{ width: '200px', height: '200px', marginBottom: '2rem', borderRadius: '50%' }} />
                   <h3 style={{ marginBottom: '0.5rem', fontSize: '1.5rem' }}>{sector.name}</h3>
                   <p style={{ marginTop: '0.5rem', fontSize: '1rem' }}>{sector.description}</p>
                 </Link>

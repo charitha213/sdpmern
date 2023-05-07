@@ -79,6 +79,9 @@ const Navbar = ({ setshowCart, showCart }) => {
             <Link to="/contact" className="link">
               <span>Contact</span>
             </Link>
+            <Link to="/ProductForm" className="link">
+              <span>+</span>
+            </Link>
             
             <Link to="/wishlist" className="link">
               <FavoriteBorderOutlined />
