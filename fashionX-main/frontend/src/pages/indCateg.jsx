@@ -1,54 +1,60 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Typography, Grid, Button } from '@material-ui/core';
+import React, { useState } from 'react';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    paddingTop: 100,
-    minWidth: 275,
-    margin: theme.spacing(2),
-    padding: theme.spacing(2),
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: theme.spacing(2),
-  },
-  contact: {
-    marginTop: theme.spacing(2),
-  },
-  button: {
-    marginTop: theme.spacing(2),
-  },
-}));
+const companies = [  { name: 'Company A', phone: '123-456-7890', email: 'info@companyA.com' },  { name: 'Company B', phone: '555-555-5555', email: 'info@companyB.com' },  { name: 'Company C', phone: '999-999-9999', email: 'info@companyC.com' },];
 
-function IndCateg() {
-  const classes = useStyles();
+const IndCateg = () => {
+  const [wishlist, setWishlist] = useState([]);
+
+  const handleAddToWishlist = (company) => {
+    setWishlist([...wishlist, company]);
+  };
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography >
-          Catering
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Typography>
-              
-            </Typography>
-            <Typography >
-              Phone: 7981929858
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} container justify="flex-end" alignItems="center">
-            <Button variant="contained" color="primary" >
-              Add to wishlist
-            </Button>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+    <div style={{ display: 'flex', justifyContent: 'center',paddingTop: 100, alignItems: 'center', flexDirection: 'column' }}>
+      <h1 style={{ marginBottom: '20px' }}>Companies</h1>
+      <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
+        {companies.map((company) => (
+          <li key={company.name} style={{ marginBottom: '10px', border: '1px solid #ccc', padding: '10px' }}>
+            <div style={{ marginBottom: '5px' }}>
+              <strong>{company.name}</strong>
+            </div>
+            <div style={{ marginBottom: '5px' }}>Phone: {company.phone}</div>
+            <div>Email: {company.email}</div>
+            <button><a 
+                 variant="contained"
+                 style={{
+                   
+                   width: "100px",
+                   height: "50px",
+                   borderRadius: "1.5rem",
+                   color: "black",
+                   fontWeight: "bold",
+                 }}>
+              Add to Wishlist
+              </a>
+              </button>
+          </li>
+        ))}
+      </ul>
+      
+      {wishlist.length > 0 && (
+        <div style={{ marginTop: '30px' }}>
+          <h2 style={{ marginBottom: '20px' }}>Wishlist</h2>
+          <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
+            {wishlist.map((company) => (
+              <li key={company.name} style={{ marginBottom: '10px', border: '1px solid #ccc', padding: '10px' }}>
+                <div style={{ marginBottom: '5px' }}>
+                  <strong>{company.name}</strong>
+                </div>
+                <div style={{ marginBottom: '5px' }}>Phone: {company.phone}</div>
+                <div>Email: {company.email}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   );
-}
+};
 
 export default IndCateg;
