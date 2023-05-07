@@ -1,0 +1,45 @@
+.company-container {
+    margin-top: 20px;
+    padding-top: 50px;
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    
+  }
+  
+  
+  
+  .form-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    background-color: #111213;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
