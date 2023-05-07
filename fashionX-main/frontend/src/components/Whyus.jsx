@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 60px;
+  padding: 10px;
   text-align: center;
 
   @media (max-width: 768px) {
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const Item = styled.div`
-  width: 160px;
+  width: 360px;
   text-align: center;
   padding: 25px 15px;
   box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.06);

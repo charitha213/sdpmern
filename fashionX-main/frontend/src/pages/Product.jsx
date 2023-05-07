@@ -30,8 +30,19 @@ const Wrapper = styled.div`
   }
 `;
 
-const ImgContainer = styled.div`
-  flex: 1;
+const ImageContainer = styled.div`
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  
+`;
+
+const ProductImage = styled.img`
+  max-width: 100%;
+  height: auto;
 `;
 
 const Image = styled.img`
@@ -173,7 +184,7 @@ const Product2 = () => {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products/find/" + id);
+        const res = await publicRequest.get("api/products/find/" + id);
         console.log(res);
         setProduct(res.data);
       } catch {
@@ -183,33 +194,11 @@ const Product2 = () => {
     getProduct();
   }, [id]);
 
-  const addToCart = async () => {
-    if (user.user) {
-      await userRequest.post(`/cart/${user.user._id}`, {
-        Product: {
-          ...product,
-          quantity,
-          color: color === "" ? product.color[0] : color,
-          size: size === "" ? product.size[0] : size,
-        },
-        quantity,
-        total: cart.total + quantity * product.price,
-      });
-      dispatch(
-        addProduct({
-          ...product,
-          quantity,
-          color: color === "" ? product.color[0] : color,
-          size: size === "" ? product.size[0] : size,
-        })
-      );
-    }
-  };
 
   const addToWish = async () => {
     if (user.user) {
       try {
-        await userRequest.post(`/wishlist/${user.user._id}`, {
+        await userRequest.post(`api/wishlist/${user.user._id}`, {
           ...product,
         });
         dispatch(addPro({ ...product }));
@@ -218,46 +207,18 @@ const Product2 = () => {
       }
     }
   };
-
+  console.log(product.img);
   return (
-    <Container img={product.img}>
+    <Container img='img/product6.jpg'>
       <Wrapper>
-        <ImgContainer>
-          <Image src={product.img} />
-        </ImgContainer>
+      <ImageContainer>
+        <ProductImage src="/img/5.jpg" alt={product.title} />
+        </ImageContainer>
         <InfoContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
           <Price>$ {product.price}</Price>
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
-              {product.color?.map((c) => (
-                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
-              ))}
-            </Filter>
-            <Filter>
-              <FilterTitle>Size</FilterTitle>
-              <FilterSize onChange={(e) => setSize(e.target.value)}>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
           <AddContainer>
-            <AmountContainer>
-              <Remove
-                onClick={() =>
-                  setQuantity(quantity > 1 ? quantity - 1 : quantity)
-                }
-              />
-              <Amount>{quantity}</Amount>
-              <Add onClick={() => setQuantity(quantity + 1)} />
-            </AmountContainer>
-            <Button onClick={addToCart}>ADD TO CART</Button>
             <Button onClick={addToWish}>WISHLIST</Button>
           </AddContainer>
         </InfoContainer>

@@ -2,6 +2,7 @@ import Wishlist from "../models/Wishlist.js";
 
 //CREATE WISHLIST
 export const wishlist = async (req, res) => {
+  console.log(" i mean hi")
   const isExist = await Wishlist.findOne({ userId: req.params.id });
   if (!isExist) {
     const newWishlist = new Wishlist({
@@ -76,16 +77,10 @@ export const getWishlist = async (req, res) => {
 
 //  GET ALL USERS WISHLIST
 export const getAllWishlists = async (req, res) => {
-  if (req.user.isAdmin) {
     try {
       const carts = await Wishlist.find();
       res.status(200).json(carts);
     } catch (err) {
       res.status(400).json(err.message);
     }
-  } else {
-    res
-      .status(405)
-      .json({ message: "You are not allowed to access all users's Wishlist." });
-  }
 };

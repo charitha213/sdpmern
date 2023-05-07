@@ -3,6 +3,13 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import { publicRequest } from "../axiosRequest";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+
 
 const Container = styled.div`
   padding: 30px 20px;

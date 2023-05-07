@@ -6,13 +6,12 @@ import {
   getWishlist,
   removeProduct,
 } from "../controllers/Wishlist.js";
-import verify from "../middlewares/verify.js";
 
 const router = express.Router();
 
-router.post("/:id", verify, wishlist);
-router.put("/:id/:pId", verify, removeProduct);
-router.delete("/:id", verify, deleteWishlist);
+router.post("/:id", wishlist);
+router.put("/:id/:pId", removeProduct);
+router.delete("/:id", deleteWishlist);
 router.get("/find/:userId", getWishlist);
 router.get("/getAll", getAllWishlists);
 

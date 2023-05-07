@@ -10,10 +10,17 @@ import Whyus from "../components/Whyus";
 import { getCart } from "../redux/cartRedux";
 import { getWishlist } from "../redux/wishlistRedux";
 
+const Container = styled.div`
+  position: relative;
+  height: 100vh;
+  padding: 80px;
+`;
+
+
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser?.user);
-  console.log(user.username)
+  
   useEffect(() => {
     if (user) {
       dispatch(getCart());
@@ -39,7 +46,3 @@ const Home = () => {
 
 export default Home;
 
-const Container = styled.div`
-  position: relative;
-  height: 100vh;
-`;

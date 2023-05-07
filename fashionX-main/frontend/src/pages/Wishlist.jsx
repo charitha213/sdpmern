@@ -2,17 +2,32 @@ import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Product from "../components/Product";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Wishlist = () => {
-  const wishlist = useSelector((state) => state.Wishlist);
+
+
+    const [products, setProducts] = useState([]);
+  
+    useEffect(() => {
+      axios.get('http://127.0.0.1:6969/api/wishlist/getAll')
+        .then(response => {
+          setProducts(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, []);
+  
 
   return (
     <>
       <Container>
         <Wrapper>
-          <h1>My Wishlist ({wishlist.products?.length})</h1>
+          <h1>My Wishlist ({products?.length})</h1>
           <ProductList>
-            {wishlist.products.map((item) => {
+            {products.map((item) => {
               return <Product key={item._id} item={item} sm="true" />;
             })}
           </ProductList>

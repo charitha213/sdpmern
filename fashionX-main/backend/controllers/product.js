@@ -48,6 +48,7 @@ export const getProduct = async (req, res) => {
     res.status(200).json(product);
   } catch (err) {
     res.status(400).json(err.message);
+    console.log("error");
   }
 };
 

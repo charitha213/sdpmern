@@ -33,7 +33,7 @@ export const getWishlist = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const user = thunkAPI.getState().user.currentUser.user;
-      const res = await userRequest.get(`/wishlist/find/${user._id}`);
+      const res = await userRequest.get(`api/wishlist/find/${user._id}`);
       return res.data;
     } catch (err) {
       console.log(err);

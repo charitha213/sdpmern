@@ -5,7 +5,6 @@ dotenv.config();
 import cors from "cors";
 import UserRoute from "./routes/userRoute.js";
 import ProductRoute from "./routes/productRoute.js";
-import cartRoute from "./routes/cartRoute.js";
 import stripeRoute from "./routes/payment.js";
 import WishlistRoute from "./routes/Wishlist.js";
 import orderRoute from "./routes/orderRoute.js";
@@ -19,7 +18,6 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 app.use("/api/user", UserRoute);
 app.use("/api/products", ProductRoute);
-app.use("/api/cart", cartRoute);
 app.use("/api/stripe", stripeRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/wishlist", WishlistRoute);
@@ -45,7 +43,6 @@ app.use(express.static(path.join(__dirname, '/frontend/build')));
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
 );
-
 
 app.listen(6969, () => {
   console.log("started");

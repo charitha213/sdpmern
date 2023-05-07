@@ -7,15 +7,14 @@ import {
   placeOrder,
   updateOrder,
 } from "../controllers/order.js";
-import verify from "../middlewares/verify.js";
 
 const router = express.Router();
 
-router.post("/:id", verify, placeOrder);
-router.put("/:id", verify, updateOrder);
-router.delete("/:id", verify, deleteOrder);
-router.get("/find/:id", verify, getOrder);
+router.post("/:id", placeOrder);
+router.put("/:id", updateOrder);
+router.delete("/:id", deleteOrder);
+router.get("/find/:id", getOrder);
 router.get("/getAll", getAllOrders);
-router.get("/income", verify, Income);
+router.get("/income", Income);
 
 export default router;
