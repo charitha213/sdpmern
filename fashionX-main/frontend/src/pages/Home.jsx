@@ -13,7 +13,7 @@ import { getWishlist } from "../redux/wishlistRedux";
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser?.user);
-
+  console.log(user.username)
   useEffect(() => {
     if (user) {
       dispatch(getCart());
